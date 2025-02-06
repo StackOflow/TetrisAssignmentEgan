@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    //While I know an audio manager script would be more industry standard, I tosed the background audio
-    //here so it wouldn't interupt other sources.
-    public AudioSource audioSource;
-    public AudioClip backgroundMusic;
     private int score = 0;
     public Text scoreText;
 

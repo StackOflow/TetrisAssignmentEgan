@@ -5,8 +5,6 @@ using UnityEngine.UIElements;
 
 public class TetrisSpawner : MonoBehaviour
 {
-
-    public AudioSource audioSource;
     public GameObject[] tetrominoPrefabs;
     private Grid grid;
     private GameObject currentPiece;
@@ -14,7 +12,7 @@ public class TetrisSpawner : MonoBehaviour
     public GameObject previewPanel;
     public GameObject gameOverScreen;
     public AudioClip youLose;
-    bool audioPlayed = false;
+    
 
     void Start()
     {
@@ -60,21 +58,6 @@ public class TetrisSpawner : MonoBehaviour
         return Instantiate(tetrominoPrefabs[Index]);
     }
 
-    //This Function is built to play the "you're trash man!" audio once when the player loses. 
-    //Took me a bit to get it to stop looping over and over
-    public void PlayLoseAudio()
-    {
-        
-
-        if (audioPlayed == false)
-        {
-
-            audioSource.clip = youLose;
-            audioSource.Play();
-            audioPlayed = true;
-        }
-    }
-
     private bool IsGameOver()
     {
         foreach(Transform block in currentPiece.transform)
@@ -82,7 +65,6 @@ public class TetrisSpawner : MonoBehaviour
             Vector2Int position = Vector2Int.RoundToInt(block.position);
             if (grid.IsCellOccupied(position))
             {
-                PlayLoseAudio();
                 gameOverScreen.SetActive(true);
                 return true;
             }
