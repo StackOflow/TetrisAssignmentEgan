@@ -11,7 +11,6 @@ public class TetrisSpawner : MonoBehaviour
     private GameObject nextPiece;
     public GameObject previewPanel;
     public GameObject gameOverScreen;
-    public AudioClip youLose;
     
 
     void Start()
