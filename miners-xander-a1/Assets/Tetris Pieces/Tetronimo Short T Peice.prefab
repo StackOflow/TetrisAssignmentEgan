@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 5159768144579007649}
   - component: {fileID: 2170191492723854749}
   m_Layer: 0
-  m_Name: Tetronimo T Peice
+  m_Name: Tetronimo Short T Peice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

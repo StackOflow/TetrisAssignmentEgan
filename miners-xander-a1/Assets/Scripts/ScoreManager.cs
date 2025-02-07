@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
     private int score = 0;
-    public Text scoreText;
+    public TMP_Text scoreText;
 
     private void Update()
     {
@@ -25,6 +26,6 @@ public class ScoreManager : MonoBehaviour
             case 5: score += 600; break;
         }
 
-        Debug.Log($"Score; {score}");
+        scoreText.text = ($"Score; {score}");
     }
 }

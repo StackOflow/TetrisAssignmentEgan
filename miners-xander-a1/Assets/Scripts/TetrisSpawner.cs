@@ -11,6 +11,7 @@ public class TetrisSpawner : MonoBehaviour
     private GameObject nextPiece;
     public GameObject previewPanel;
     public GameObject gameOverScreen;
+    public bool gameover = false;
     
 
     void Start()
@@ -24,6 +25,11 @@ public class TetrisSpawner : MonoBehaviour
 
     public void SpawnPiece()
     {
+        if (gameover)
+        {
+            return;
+        }
+        
         Vector3 spawnPosition = new Vector3(Mathf.Floor(grid.width / 2f), grid.height - 1, 0);
 
         if (nextPiece != null)
@@ -47,8 +53,10 @@ public class TetrisSpawner : MonoBehaviour
 
         if (IsGameOver())
         {
-            return;
+            gameover = true;
         }
+
+
     }
 
     private GameObject InstantiateRandomPiece()
@@ -59,16 +67,16 @@ public class TetrisSpawner : MonoBehaviour
 
     private bool IsGameOver()
     {
-        foreach(Transform block in currentPiece.transform)
+
+        foreach (Transform block in currentPiece.transform)
         {
             Vector2Int position = Vector2Int.RoundToInt(block.position);
             if (grid.IsCellOccupied(position))
             {
-                gameOverScreen.SetActive(true);
                 return true;
             }
 
-            
+
         }
         return false;
     }

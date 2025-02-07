@@ -6,26 +6,21 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    //Grid Height & Width, public in case we want to edit later
+    //Grid Width and Height
     public int width = 10;
     public int height = 20;
 
-    //This transform will be the actual grid of the tetris game
-    public AudioSource audioSource;
+    //This transform makes up the grid itself
     private Transform[,] grid;
-    public AudioClip[] celebrations;
-    public float dannyTimer = 0;
-    public GameObject dannyDevito;
 
-    void Start()
+    void Awake()
     {
         //create the grid using the width and height variables
         grid = new Transform[width, height];
-        dannyDevito.SetActive(true);
 
 
     }
-    //Check if cell is occupied 
+    //Check if a cell is occupied 
     public bool IsCellOccupied(Vector2Int position, bool gameOverCheck = false)
     {
         if (position.x < 0 || position.x >= width || position.y >= height || position.y <= 0)
@@ -36,8 +31,8 @@ public class Grid : MonoBehaviour
             }
             return true; //Out of Bounds
         }
-        //Returning the result of the statement, if it's occupied it will return true, of not return false
-        return grid[position.x, position.y] != null; // True if there is an object at our position
+        //Returning the result of the statement, occupied = true
+        return grid[position.x, position.y] != null;
     }
 
 
@@ -85,13 +80,6 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public void PlayCelebAudio()
-    {
-        int index = UnityEngine.Random.Range(0, 5);
-        audioSource.clip = celebrations[index];
-        audioSource.Play();
-    }
-
    
 
     public void ClearFullLines()
@@ -105,9 +93,6 @@ public class Grid : MonoBehaviour
                 ClearLine(y);
                 ShiftRowsDown(y);
                 y--;
-
-                dannyTimer = 7;
-                PlayCelebAudio();
                 
                 
                 
@@ -117,21 +102,6 @@ public class Grid : MonoBehaviour
         }
 
         FindAnyObjectByType<ScoreManager>().AddScore(linesCleared);
-    }
-
-    public void Update()
-    {
-        dannyTimer -= (1 * Time.deltaTime);
-
-        if (dannyTimer >= 0)
-        {
-            dannyDevito.SetActive(true);
-            
-        }
-        else
-        {
-            dannyDevito.SetActive(false);
-        }
     }
 
 
